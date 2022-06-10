@@ -129,6 +129,179 @@ def postulacion():
     si se postuló correctamente o no
     información recopilada de: https://drive.google.com/file/d/1jVqexdOxCfdSbMaX_Qhf0b-Tj4wlnPjo/view
     '''
+    #variable para elegir el menú
+    opcionPostulacion=int
+    #bucle while 
+    while opcionPostulacion!=4:
+        '''
+        Validación opciones dentro del menú
+        '''
+        print("Bienvenido", aspirante.nombre, aspirante.apellido)
+        #Se pide por pantalla el puntaje alcanzado en el examen de admisión
+        aspirante.puntaje=int(input("Ingrese el puntaje adquirido: "))
+        '''
+        Universidades que se tomaron de ejemplo para la 
+        respectiva postulación del aspirante
+        '''
+        #Universidades a postular: 
+        print("Universidades:")
+        print("1. Universidad Central del Ecuador")
+        print("2. Universidad de Guayaquil")
+        print("3. Universidad Técnica en Ambato")
+        opcionPostulacion=int(input("Ingrese una opción: "))
+        #menú if
+        '''
+        Menú respectivo para cada universidad
+        en cada uno de estos estarán las respectivas carreras de cada universidad
+        así como también las notas de postulación
+        '''
+        if opcionPostulacion == 1:
+            #carreras postular
+            print("1. Administración de Empresas [825]")
+            print("2. Administración Pública [802]")
+            print("3. Arquitectura [898]")
+            #puntajes de cada uno de las universidades
+            uceAdminEmpresas=825
+            uceAdminPublica=802
+            uceArquitectura=898
+            opcionUPostulacion=int(input("Elija la opcion a postular: "))
+            #menu de cada una de las carreras a postular
+            if opcionUPostulacion == 1:
+            #menu de cada una de las carreras a postular
+                if aspirante.puntaje>=uceAdminEmpresas:
+                    #condicional para determinar si el puntaje es valido para postular o no
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 2:
+                if aspirante.puntaje>=uceAdminPublica:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 3:
+                if aspirante.puntaje>=uceArquitectura:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+        elif opcionPostulacion == 2:
+        #universidad 2 
+            print("1. Administración y Suerpvisión Educativa (Ciencias de la Educación) [772]")
+            print("2. Bibliotecología y Archivología [662]")
+            print("3. Biología [732]")
+            print("4. Ciencias de la Educación y Desarrollo Comunitario Ambiental [735]")
+            print("5. Ciencias Químicas [704]")
+            print("6. Comercio Exterior [760]")
+            ugAdministracioEducativa=772
+            ugBibliotegologia=662
+            ugBiologia=732
+            ugCienciasEducacion=735
+            ugCienciasQuimicas=704
+            comercioExterior=760
+            opcionUPostulacion=int(input("Elija la opcion a postular"))
+            if opcionUPostulacion == 1:
+                if aspirante.puntaje>=ugAdministracioEducativa:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 2:
+                if aspirante.puntaje>=ugBibliotegologia:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 3:
+                if aspirante.puntaje>=ugBiologia:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 4:
+                if aspirante.puntaje>=ugCienciasEducacion:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 5:
+                if aspirante.puntaje>=ugCienciasQuimicas:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 6:
+                if aspirante.puntaje>=comercioExterior:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+        elif opcionPostulacion == 3:
+        #universidad 3
+            print("1. Comunicacón Social [792]")
+            print("2. Contabilidad y Auditoría [819]")
+            print("3. Derecho [835]")
+            print("4. Ingeniería Bioquimica [809]")
+            print("5. Ingeniería Civil [871]")
+            print("6. Ingenieria Electrónica y Comunicaciones [783]")
+            print("7. Ingeniería en Alimentos [799]")
+            opcionUPostulacion=int(input("Elija la opcion a postular: "))
+            utaComunicacion=792
+            utaContabilidad=819
+            utaDerecho=835
+            utaIngeniriaBioquimia=809
+            utaIngenieraCivl=871
+            utaIngenieraEyC=783
+            utaIngenieriaAlimentos=799
+
+            if opcionUPostulacion == 1:
+                if aspirante.puntaje>=utaComunicacion:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 2:
+                if aspirante.puntaje>=utaContabilidad:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 3:
+                if aspirante.puntaje>=utaDerecho:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 4:
+                if aspirante.puntaje>=utaIngeniriaBioquimia:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 5:
+                if aspirante.puntaje>=utaIngenieraCivl:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 6:
+                if aspirante.puntaje>=utaIngenieraEyC:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+            elif opcionUPostulacion == 7:
+                if aspirante.puntaje>=utaIngenieriaAlimentos:
+                    print("[+] Correctamente postulado")
+                    break
+                else:
+                    print("[-] Puntaje no apto para la postulación")
+        #opcion para salir del programa
+        elif opcionPostulacion == 4:
+            print("Saliendo...")
+        else:
+            print("[x] Ingrese una opción correcta")
 while opcion!=5:
     #menú a mostrar
     print("╔═══════════════════════════════════╗")
