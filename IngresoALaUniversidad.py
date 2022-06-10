@@ -166,7 +166,7 @@ def postulacion():
             uceArquitectura=898
             opcionUPostulacion=int(input("Elija la opcion a postular: "))
             #menu de cada una de las carreras a postular
-            if opcionUPostulacion == 1:
+            if opcionUPostulacion == 1:  #postulacion carrera 1
             #menu de cada una de las carreras a postular
                 if aspirante.puntaje>=uceAdminEmpresas:
                     #condicional para determinar si el puntaje es valido para postular o no
@@ -174,19 +174,19 @@ def postulacion():
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 2:
+            elif opcionUPostulacion == 2: #postulacion carrera 2
                 if aspirante.puntaje>=uceAdminPublica:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 3:
+            elif opcionUPostulacion == 3: #postulacion carrera 3
                 if aspirante.puntaje>=uceArquitectura:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-        elif opcionPostulacion == 2:
+        elif opcionPostulacion == 2: #postulacion universidad 2
         #universidad 2 
             print("1. Administración y Suerpvisión Educativa (Ciencias de la Educación) [772]")
             print("2. Bibliotecología y Archivología [662]")
@@ -201,43 +201,43 @@ def postulacion():
             ugCienciasQuimicas=704
             comercioExterior=760
             opcionUPostulacion=int(input("Elija la opcion a postular"))
-            if opcionUPostulacion == 1:
+            if opcionUPostulacion == 1: #postulacion carrera 1
                 if aspirante.puntaje>=ugAdministracioEducativa:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 2:
+            elif opcionUPostulacion == 2: #postulacion carrera 2
                 if aspirante.puntaje>=ugBibliotegologia:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 3:
+            elif opcionUPostulacion == 3: #postulacion carrera 3
                 if aspirante.puntaje>=ugBiologia:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 4:
+            elif opcionUPostulacion == 4: #postulacion carrera 4
                 if aspirante.puntaje>=ugCienciasEducacion:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 5:
+            elif opcionUPostulacion == 5: #postulacion carrera 5
                 if aspirante.puntaje>=ugCienciasQuimicas:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 6:
+            elif opcionUPostulacion == 6: #postulacion carrera 6
                 if aspirante.puntaje>=comercioExterior:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-        elif opcionPostulacion == 3:
+        elif opcionPostulacion == 3: #postulacion universidad 3
         #universidad 3
             print("1. Comunicacón Social [792]")
             print("2. Contabilidad y Auditoría [819]")
@@ -256,42 +256,42 @@ def postulacion():
             utaIngenieriaAlimentos=799
 
             if opcionUPostulacion == 1:
-                if aspirante.puntaje>=utaComunicacion:
+                if aspirante.puntaje>=utaComunicacion: #postulacion carrera 1
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 2:
+            elif opcionUPostulacion == 2: #postulacion carrera 2
                 if aspirante.puntaje>=utaContabilidad:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 3:
+            elif opcionUPostulacion == 3: #postulacion carrera 3
                 if aspirante.puntaje>=utaDerecho:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 4:
+            elif opcionUPostulacion == 4: #postulacion carrera 4
                 if aspirante.puntaje>=utaIngeniriaBioquimia:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 5:
+            elif opcionUPostulacion == 5: #postulacion carrera 5
                 if aspirante.puntaje>=utaIngenieraCivl:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 6:
+            elif opcionUPostulacion == 6: #postulacion carrera 6
                 if aspirante.puntaje>=utaIngenieraEyC:
                     print("[+] Correctamente postulado")
                     break
                 else:
                     print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 7:
+            elif opcionUPostulacion == 7: #postulacion carrera 7
                 if aspirante.puntaje>=utaIngenieriaAlimentos:
                     print("[+] Correctamente postulado")
                     break
@@ -368,24 +368,26 @@ def main():
             superior
             recopilado de: https://admision.senescyt.gob.ec/
             '''
+            #cronograma a mostrar 
             print("Cronogramas")
             print("────────────────────")
-            print("Tercera postulación")
+            print("Tercera postulación") #etapa 9
             print("31 de mayo y 1 de junio\nEtapa 9")
             print("────────────────────")
-            print("Segunda aceptación de cupo\n25 y 26 de mayo\nEtapa 8")
+            print("Segunda aceptación de cupo\n25 y 26 de mayo\nEtapa 8") #etapa 8
             print("────────────────────")
-            print("Segunda postulación\n20 al 22 de mayo\nEtapa 7")
+            print("Segunda postulación\n20 al 22 de mayo\nEtapa 7") #etapa 7
             print("────────────────────")
-            print("Aceptación de cupo\n10 y 11 de mayo\nEtapa 6")
+            print("Aceptación de cupo\n10 y 11 de mayo\nEtapa 6") #etapa 6
             print("────────────────────")
-            print("Primera postulación\nDel 4 al 6 de mayo\nEtapa 5")
+            print("Primera postulación\nDel 4 al 6 de mayo\nEtapa 5") #etapa 5
             print("────────────────────")
-            print("Test Transformar\n23 de marzo\nEtapa 4")
+            print("Test Transformar\n23 de marzo\nEtapa 4") #etapa 4
             print("────────────────────")
-            print("Programa de nivelación general Transformándonos primer periodo 2022\nA partir del 25 de enero\nEtapa 2")
+            #etapa 3 no considerada
+            print("Programa de nivelación general Transformándonos primer periodo 2022\nA partir del 25 de enero\nEtapa 2") #etapa 2
             print("────────────────────")
-            print("Retorno al Acceso a la Educación Superior\nDel 2 al 4 de diciembre\nEtapa 1")
+            print("Retorno al Acceso a la Educación Superior\nDel 2 al 4 de diciembre\nEtapa 1") #etapa 1
             enter=str(input("Presione enter para continuar"))
         #opción 4
         elif opcion == 4:
@@ -394,27 +396,28 @@ def main():
             pero esta solo se encarga de mostrar la información de las universidades
             a postular
             información recopilada de = https://drive.google.com/file/d/1jVqexdOxCfdSbMaX_Qhf0b-Tj4wlnPjo/view
+            nombreCarrera [puntajeCarrera]
             '''
             opcionPostulacion=int
             print("Carreras")
             while opcionPostulacion!=3:
-                print("Universidades:")
+                print("Universidades:")#universidades a postular
                 print("1. Universidad Central del Ecuador")
                 print("2. Universidad de guayaquil")
                 print("3. Universidad Técnica en Ambato")
-                opcionPostulacion=int(input("Ingrese una opción: "))
-                if opcionPostulacion == 1:
+                opcionPostulacion=int(input("Ingrese una opción: ")) #carreraas a postular
+                if opcionPostulacion == 1: #carrearas universidad 1
                     print("1. Administración de Empresas [825]")
                     print("2. Administración Pública [802]")
                     print("3. Arquitectura [898]")
-                elif opcionPostulacion == 2:
+                elif opcionPostulacion == 2: #carrearas universidad 2
                     print("Administración y Suerpvisión Educativa (Ciencias de la Educación) [772]")
                     print("Bibliotecología y Archivología [662]")
                     print("Biología [732]")
                     print("Ciencias de la Educación y Desarrollo Comunitario Ambiental [735]")
                     print("Ciencias Químicas [704]")
                     print("Comercio Exterior [760]")
-                elif opcionPostulacion == 3:
+                elif opcionPostulacion == 3: #carrearas universidad 3
                     print("Comunicacón Social [792]")
                     print("Contabilidad y Auditoría [819]")
                     print("Derecho [835]")
@@ -430,4 +433,5 @@ def main():
             print("[x] Opción invalida, elija una opción correcta")
             enter=str(input("Presione enter para continuar"))
 
+#Invocación del menú main
 main()
