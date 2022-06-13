@@ -121,6 +121,136 @@ aspirante=estudiante("ejemplo","ejemplo","1234512345", puntaje)
 opcion=int
 #bucle while, para la validación opciones en el menú
 
+def main():
+    opcion=int
+    while opcion!=5:
+        #menú a mostrar
+        print("╔═══════════════════════════════════╗")
+        print("║Proceso de ingreso a la universidad║")
+        print("╚═══════════════════════════════════╝")
+        print("1. Iniciar sesión")
+        print("2. Registrarse")
+        print("3. Ver cronogramas de inscripción")
+        print("4. Ver universidades a postular")
+        #opciones a ingresar
+        opcion=int(input("Elija una opción: "))
+        #opcion 1
+        if opcion == 1:
+            opcionInicioSesion()
+        #opcion 2
+        elif opcion == 2:
+            opcionRegistroSesion()
+        #opcion 3
+        elif opcion == 3:
+            opcionRegistroSesion()
+        #opción 4
+        elif opcion == 4:
+            opcionMostrarCarrerars()
+        elif opcion == 5:
+            print("Saliendo...")
+            enter=str(input("Presione enter para continuar"))
+        else:
+            print("[x] Opción invalida, elija una opción correcta")
+            enter=str(input("Presione enter para continuar"))
+
+def opcionInicioSesion (): #opción de inicio se sesión
+    '''
+    Inicio de sesión
+    Llamamos a los métodos respectivamente antes comentados
+    para el ingreso de sesión 
+    '''
+    print("\n──────────────────────")
+    print("Inicio de sesión")
+    #funcioin usuarioContrasena para dar valores al usuario y contraseña y no marcar error
+    aspirante.usuarioContrasena()
+    #funcion para iniciar sesión
+    aspirante.inicioSesion()
+    if  aspirante.acceder == True:
+        postulacion()
+    else:
+        enter=str(input("Presione enter para continuar..."))
+
+def opcionRegistroSesion (): #opcion del registro de sesión
+    '''
+    Registro:
+    Se realiza el respectivo registo de los datos del aspirante mediante
+    los métodos en la clase
+    ingresoDatos=recoplicación de datos; nombre, apellido, cedula.
+    usuarioContrasena=regresa el nombre de usuario y contraseña para poder iniciar sesión
+    '''
+    print("\n──────────────────────")
+    print("Registro")
+    #método ingreso de datos
+    aspirante.ingresoDatos()
+    #método para la creación del usuario y contraseña
+    aspirante.usuarioContrasena()
+    #se muestra por pantalla las credenciales para el ingreso de sesión
+    print("Usuario:", aspirante.usuarioAspirante)
+    print("Contrasena:", aspirante.contrasenaAspirante)
+    enter=str(input("Presione enter para continuar"))
+
+def opcionCronograma (): #opción para mostrar al crónograma 
+    print("Cronogramas")
+    print("────────────────────")
+    print("Tercera postulación") #etapa 9
+    print("31 de mayo y 1 de junio\nEtapa 9")
+    print("────────────────────")
+    print("Segunda aceptación de cupo\n25 y 26 de mayo\nEtapa 8") #etapa 8
+    print("────────────────────")
+    print("Segunda postulación\n20 al 22 de mayo\nEtapa 7") #etapa 7
+    print("────────────────────")
+    print("Aceptación de cupo\n10 y 11 de mayo\nEtapa 6") #etapa 6
+    print("────────────────────")
+    print("Primera postulación\nDel 4 al 6 de mayo\nEtapa 5") #etapa 5
+    print("────────────────────")
+    print("Test Transformar\n23 de marzo\nEtapa 4") #etapa 4
+    print("────────────────────")
+    #etapa 3 no considerada
+    print("Programa de nivelación general Transformándonos primer periodo 2022\nA partir del 25 de enero\nEtapa 2") #etapa 2
+    print("────────────────────")
+    print("Retorno al Acceso a la Educación Superior\nDel 2 al 4 de diciembre\nEtapa 1") #etapa 1
+    enter=str(input("Presione enter para continuar"))
+
+def opcionMostrarCarrerars ():
+    '''
+    Cumple casi con el mismo objetivo de la funcion postulacion
+    pero esta solo se encarga de mostrar la información de las universidades
+    a postular
+    información recopilada de = https://drive.google.com/file/d/1jVqexdOxCfdSbMaX_Qhf0b-Tj4wlnPjo/view
+    nombreCarrera [puntajeCarrear]
+    '''
+    opcionPostulacion=int
+    print("Carreras")
+    while opcionPostulacion!=4:
+        print("Universidades:")#universidades a postular
+        print("1. Universidad Central del Ecuador")
+        print("2. Universidad de guayaquil")
+        print("3. Universidad Técnica en Ambato")
+        opcionPostulacion=int(input("Ingrese una opción: ")) #carreraas a postular
+        if opcionPostulacion == 1: #carrearas universidad 1
+            print("1. Administración de Empresas [825]")
+            print("2. Administración Pública [802]")
+            print("3. Arquitectura [898]")
+        elif opcionPostulacion == 2: #carrearas universidad 2
+            print("Administración y Suerpvisión Educativa (Ciencias de la Educación) [772]")
+            print("Bibliotecología y Archivología [662]")
+            print("Biología [732]")
+            print("Ciencias de la Educación y Desarrollo Comunitario Ambiental [735]")
+            print("Ciencias Químicas [704]")
+            print("Comercio Exterior [760]")
+        elif opcionPostulacion == 3: #carrearas universidad 3
+            print("Comunicacón Social [792]")
+            print("Contabilidad y Auditoría [819]")
+            print("Derecho [835]")
+            print("Ingeniería Bioquimica [809]")
+            print("Ingeniería Civil [871]")
+            print("Ingenieria Electrónica y Comunicaciones [783]")
+            print("Ingeniería en Alimentos [799]")
+        elif opcionPostulacion == 4: #salir
+            print("Saliendo...")
+            enter=str(input("Presione enter para continuar"))
+    enter=str(input("Presione enter para continuar"))
+
 def postulacion():
     '''
     Función Postulación:
@@ -303,135 +433,6 @@ def postulacion():
         else:
             print("[x] Ingrese una opción correcta")
 
-def main():
-    opcion=int
-    while opcion!=5:
-        #menú a mostrar
-        print("╔═══════════════════════════════════╗")
-        print("║Proceso de ingreso a la universidad║")
-        print("╚═══════════════════════════════════╝")
-        print("1. Iniciar sesión")
-        print("2. Registrarse")
-        print("3. Ver cronogramas de inscripción")
-        print("4. Ver universidades a postular")
-        #opciones a ingresar
-        opcion=int(input("Elija una opción: "))
-        #opcion 1
-        if opcion == 1:
-            '''
-            Inicio de sesión
-            Llamamos a los métodos respectivamente antes comentados
-            para el ingreso de sesión 
-            '''
-            print("\n──────────────────────")
-            print("Inicio de sesión")
-            #funcioin usuarioContrasena para dar valores al usuario y contraseña y no marcar error
-            aspirante.usuarioContrasena()
-            #funcion para iniciar sesión
-            aspirante.inicioSesion()
-            '''
-            Condicional if
-                Condicional para determinar si
-                la contraseña está correcta nos permitá
-                ir al portal de postulación de lo contrario 
-                nos regresará al menú principal
-            '''
-            if  aspirante.acceder == True:
-                postulacion()
-            else:
-                enter=str(input("Presione enter para continuar..."))
-        #opcion 2
-        elif opcion == 2:
-            '''
-            Registro:
-            Se realiza el respectivo registo de los datos del aspirante mediante
-            los métodos en la clase
-            ingresoDatos=recoplicación de datos; nombre, apellido, cedula.
-            usuarioContrasena=regresa el nombre de usuario y contraseña para poder iniciar sesión
-            '''
-            print("\n──────────────────────")
-            print("Registro")
-            #método ingreso de datos
-            aspirante.ingresoDatos()
-            #método para la creación del usuario y contraseña
-            aspirante.usuarioContrasena()
-            #se muestra por pantalla las credenciales para el ingreso de sesión
-            print("Usuario:", aspirante.usuarioAspirante)
-            print("Contrasena:", aspirante.contrasenaAspirante)
-            enter=str(input("Presione enter para continuar"))
-        #opcion 3
-        elif opcion == 3:
-            '''
-            Esta opción se base simplemente en el cronograma
-            que usa la SENESCYT para el respectivo proceso
-            antes y después del ingreso a la educación 
-            superior
-            recopilado de: https://admision.senescyt.gob.ec/
-            '''
-            #cronograma a mostrar 
-            print("Cronogramas")
-            print("────────────────────")
-            print("Tercera postulación") #etapa 9
-            print("31 de mayo y 1 de junio\nEtapa 9")
-            print("────────────────────")
-            print("Segunda aceptación de cupo\n25 y 26 de mayo\nEtapa 8") #etapa 8
-            print("────────────────────")
-            print("Segunda postulación\n20 al 22 de mayo\nEtapa 7") #etapa 7
-            print("────────────────────")
-            print("Aceptación de cupo\n10 y 11 de mayo\nEtapa 6") #etapa 6
-            print("────────────────────")
-            print("Primera postulación\nDel 4 al 6 de mayo\nEtapa 5") #etapa 5
-            print("────────────────────")
-            print("Test Transformar\n23 de marzo\nEtapa 4") #etapa 4
-            print("────────────────────")
-            #etapa 3 no considerada
-            print("Programa de nivelación general Transformándonos primer periodo 2022\nA partir del 25 de enero\nEtapa 2") #etapa 2
-            print("────────────────────")
-            print("Retorno al Acceso a la Educación Superior\nDel 2 al 4 de diciembre\nEtapa 1") #etapa 1
-            enter=str(input("Presione enter para continuar"))
-        #opción 4
-        elif opcion == 4:
-            '''
-            Cumple casi con el mismo objetivo de la funcion postulacion
-            pero esta solo se encarga de mostrar la información de las universidades
-            a postular
-            información recopilada de = https://drive.google.com/file/d/1jVqexdOxCfdSbMaX_Qhf0b-Tj4wlnPjo/view
-            nombreCarrera [puntajeCarrera]
-            '''
-            opcionPostulacion=int
-            print("Carreras")
-            while opcionPostulacion!=3:
-                print("Universidades:")#universidades a postular
-                print("1. Universidad Central del Ecuador")
-                print("2. Universidad de guayaquil")
-                print("3. Universidad Técnica en Ambato")
-                opcionPostulacion=int(input("Ingrese una opción: ")) #carreraas a postular
-                if opcionPostulacion == 1: #carrearas universidad 1
-                    print("1. Administración de Empresas [825]")
-                    print("2. Administración Pública [802]")
-                    print("3. Arquitectura [898]")
-                elif opcionPostulacion == 2: #carrearas universidad 2
-                    print("Administración y Suerpvisión Educativa (Ciencias de la Educación) [772]")
-                    print("Bibliotecología y Archivología [662]")
-                    print("Biología [732]")
-                    print("Ciencias de la Educación y Desarrollo Comunitario Ambiental [735]")
-                    print("Ciencias Químicas [704]")
-                    print("Comercio Exterior [760]")
-                elif opcionPostulacion == 3: #carrearas universidad 3
-                    print("Comunicacón Social [792]")
-                    print("Contabilidad y Auditoría [819]")
-                    print("Derecho [835]")
-                    print("Ingeniería Bioquimica [809]")
-                    print("Ingeniería Civil [871]")
-                    print("Ingenieria Electrónica y Comunicaciones [783]")
-                    print("Ingeniería en Alimentos [799]")
-            enter=str(input("Presione enter para continuar"))
-        elif opcion == 5:
-            print("Saliendo...")
-            enter=str(input("Presione enter para continuar"))
-        else:
-            print("[x] Opción invalida, elija una opción correcta")
-            enter=str(input("Presione enter para continuar"))
 
-#Invocación del menú main
-main()
+if __name__ == '__main__': #main
+    main() #menú principal
