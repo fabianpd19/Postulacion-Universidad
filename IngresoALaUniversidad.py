@@ -32,8 +32,6 @@ class estudiante:
     -------
     __init__(self, nombre, apellido, cedula, puntaje):
         Construye atributos para la clase estudiante
-    ingresoDatos(self):
-        Recopilación de datos, pidiéndolos por pantalla
     usuarioContrasena(self)):
         Genera un usuario y contraseña a partir de los datos ingresados
     iniciarSesión(self)):
@@ -48,26 +46,7 @@ class estudiante:
         self.apellido=apellido 
         self.cedula=cedula
         self.puntaje=puntaje 
-    def ingresoDatos (self):
-        """ 
-        Recopilación de datos
-        """
-        self.nombre=str(input("Ingrese su nombre: "))  
-        self.apellido=str(input("Ingrese su apellido: "))
-         
-        #asignamos un valor a la cédula, para evitar un error.
-        self.cedula="0" 
-        while len(self.cedula)!=10:
-             
-            #ciclo while para validar que la cédula tenga 10 dígitos 
-            self.cedula=input("Ingrese su número de cédula: ")
-            if len(self.cedula)==10: 
-                '''
-                función len: función para determinar la longitud de una cadena (string) 
-                '''
-                print("[+] Ingreso de datos correcto") 
-            else:
-                print("[x] Cédula incorrecta, vuelva a ingresar") 
+
     def usuarioContrasena (self):
         '''
         Método usuarioContrasena: 
@@ -128,10 +107,10 @@ class universidad:
         Construye los atributos de las clases
     """
     def __init__(self, nombre, carrera, ciudad, puntaje):
-        self.nombre=list(nombre)
-        self.carrera=list(carrera)
-        self.ciudad=list(ciudad)
-        self.puntaje=list(puntaje)
+        self.nombre=nombre
+        self.carrera=carrera
+        self.ciudad=ciudad
+        self.puntaje=puntaje
 
 class FeriadoEcuador(HolidayBase):
     """
@@ -281,7 +260,7 @@ class FeriadoEcuador(HolidayBase):
             else:
                 self[datetime.date(anio, DEC, 6)] = nombre
 
-class test:
+class fechaFeriado:
     '''
     Clase para determinar los respectivos crónogramas
         Basado en el cronograma de la SENESCYT: https://admision.senescyt.gob.ec/
@@ -367,38 +346,6 @@ class test:
         return False
 
 
-def main():
-    opcion=int 
-    while opcion!=5: 
-        #menú a mostrar 
-        print("╔═══════════════════════════════════╗")
-        print("║Proceso de ingreso a la universidad║") 
-        print("╚═══════════════════════════════════╝")
-        print("1. Iniciar sesión") 
-        print("2. Registrarse") 
-        print("3. Ver cronogramas de inscripción") 
-        print("4. Ver universidades a postular")
-        #opciones a ingresar 
-        opcion=int(input("Elija una opción: ")) 
-        #opcion 1 
-        if opcion == 1: 
-            opcionInicioSesion() 
-        #opcion 2 
-        elif opcion == 2:
-            opcionRegistroSesion() 
-        #opcion 3 
-        elif opcion == 3: 
-            opcionRegistroSesion() 
-        #opción 4 
-        elif opcion == 4: 
-            opcionMostrarCarrerars()
-        elif opcion == 5:
-            print("Saliendo...")
-            enter=str(input("Presione enter para continuar"))
-        else:
-            print("[x] Opción invalida, elija una opción correcta")
-            enter=str(input("Presione enter para continuar"))
-
 def opcionInicioSesion (): #opción de inicio se sesión
     '''
     Inicio de sesión
@@ -416,24 +363,6 @@ def opcionInicioSesion (): #opción de inicio se sesión
     else:
         enter=str(input("Presione enter para continuar..."))
 
-def opcionRegistroSesion (): #opcion del registro de sesión
-    '''
-    Registro: 
-    Se realiza el respectivo registo de los datos del aspirante mediante 
-    los métodos en la clase 
-    ingresoDatos=recoplicación de datos; nombre, apellido, cedula. 
-    usuarioContrasena=regresa el nombre de usuario y contraseña para poder iniciar sesión 
-    '''
-    print("\n──────────────────────")
-    print("Registro")
-    #método ingreso de datos
-    aspirante.ingresoDatos()
-    #método para la creación del usuario y contraseña
-    aspirante.usuarioContrasena()
-    #se muestra por pantalla las credenciales para el ingreso de sesión
-    print("Usuario:", aspirante.usuarioAspirante)
-    print("Contrasena:", aspirante.contrasenaAspirante)
-    enter=str(input("Presione enter para continuar")) 
 
 def opcionCronograma (): #opción para mostrar al crónograma 
     print("Cronogramas")
@@ -525,12 +454,12 @@ def postulacion():
         print("1. Universidad Central del Ecuador") 
         print("2. Universidad de Guayaquil") 
         print("3. Universidad Técnica en Ambato") 
-        while validacionPostulacion==True:
-            opcionPostulacion=int(input("Ingrese una opción: ")) 
+        while validacionPostulacion==False:
+            opcionPostulacion=int(input("Ingrese puntaje de postluación: ")) 
             if opcionPostulacion<=1000:
                 validacionPostulacion=True
             else:
-                print("[!] Ingrese un valor menor a 1000")
+                print("[!] Ingrese un puntaje de postulación válido")
                 enter=str(input("Presione enter para continuar")) 
                 validacionPostulacion=False 
         #menú if
@@ -682,7 +611,7 @@ def postulacion():
         else:
             print("[x] Ingrese una opción correcta")
 
- 
+
 if __name__ == '__main__': #main  
     
     # fecha=input("Ingrese fecha con el siguiente formato YYYY-MM-DD: ")
@@ -692,12 +621,57 @@ if __name__ == '__main__': #main
     #     print("feriado")
     # else:
     #     print("no es feirado?")
-    ''' 
-    Instancia de la clase estudiante:
-    ''' 
-    puntaje=int
-    aspirante=estudiante("ejemplo","ejemplo","1234512345", puntaje) 
-    #opcion=variable para validar opciones en el menú
+    
+    aspirante=estudiante("nombre", "apellido", "cedula", 999)
+    
     opcion=int
-    #bucle while, para la validación opciones en el menú 
-    main() #menú principal 
+    while opcion!=5: 
+        #menú a mostrar 
+        print("╔═══════════════════════════════════╗")
+        print("║Proceso de ingreso a la universidad║") 
+        print("╚═══════════════════════════════════╝")
+        print("1. Iniciar sesión") 
+        print("2. Registrarse") 
+        print("3. Ver cronogramas de inscripción") 
+        print("4. Ver universidades a postular")
+        print("5. Salir")
+        #opciones a ingresar 
+        numero=(input("Ingrese una opción: "))
+        if numero.isnumeric():
+            numero=int(numero)
+            opcion=numero
+        else:
+            print("[!] Ingrese un número")
+        #opcion 1 
+        if opcion == 1: 
+            opcionInicioSesion() 
+        #opcion 2 
+        elif opcion == 2:
+            """ 
+            Recopilación de datos
+            """
+            nombre=str(input("Ingrese su nombre: "))  
+            apellido=str(input("Ingrese su apellido: "))
+                
+            #asignamos un valor a la cédula, para evitar un error.
+            cedula="0" 
+
+
+            puntaje=input(f'Bienvendio {nombre} {apellido}, a continuación ingrese su puntaje obtenido: ')
+            aspirante=estudiante(nombre, apellido, cedula, puntaje)
+            aspirante.usuarioContrasena()
+            print("Usuario:", aspirante.usuarioAspirante)
+            print("Contrasena:", aspirante.contrasenaAspirante)
+            enter=str(input("Presione enter para continuar")) 
+        #opcion 3 
+        elif opcion == 3: 
+            opcionCronograma() 
+        #opción 4 
+        elif opcion == 4: 
+            opcionMostrarCarrerars()
+        elif opcion == 5:
+            print("Saliendo...")
+            enter=str(input("Presione enter para continuar"))
+        else:
+            print("[x] Opción invalida, elija una opción correcta")
+            enter=str(input("Presione enter para continuar"))
