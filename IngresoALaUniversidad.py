@@ -685,19 +685,19 @@ def postulacion():
  
 if __name__ == '__main__': #main  
     
-    fecha=input("Ingrese fecha con el siguiente formato YYYY-MM-DD: ")
-    online=False
-    feriados=test(fecha, online)
-    if feriados.condicionFecha():
-        print("feriado")
-    else:
-        print("no es feirado?")
-    # ''' 
-    # Instancia de la clase estudiante:
-    # ''' 
-    # puntaje=int
-    # aspirante=estudiante("ejemplo","ejemplo","1234512345", puntaje) 
-    # #opcion=variable para validar opciones en el menú
-    # opcion=int
-    # #bucle while, para la validación opciones en el menú 
-    # main() #menú principal 
+    # fecha=input("Ingrese fecha con el siguiente formato YYYY-MM-DD: ")
+    # online=False
+    # feriados=test(fecha, online)
+    # if feriados.condicionFecha():
+    #     print("feriado")
+    # else:
+    #     print("no es feirado?")
+    ''' 
+    Instancia de la clase estudiante:
+    ''' 
+    puntaje=int
+    aspirante=estudiante("ejemplo","ejemplo","1234512345", puntaje) 
+    #opcion=variable para validar opciones en el menú
+    opcion=int
+    #bucle while, para la validación opciones en el menú 
+    main() #menú principal 
