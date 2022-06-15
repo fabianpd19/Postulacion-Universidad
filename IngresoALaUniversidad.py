@@ -110,7 +110,14 @@ class universidad:
         self.nombre=nombre
         self.carrera=carrera
         self.ciudad=ciudad
-        self.puntaje=puntaje
+        self.puntaje=int(puntaje)
+    def postularUniversidad (self, puntajeEstudiante):
+        self.puntajeEstudiante=puntajeEstudiante
+        if puntajeEstudiante>=self.puntaje:
+            print("[+] Postulación exitosa")
+        else:
+            print("[-] Lamentablemente no cuentas con el puntaje requirido")
+
 
 class FeriadoEcuador(HolidayBase):
     """
@@ -395,12 +402,14 @@ def opcionMostrarCarrerars ():
     nombreCarrera [puntajeCarrear] 
     '''
     opcionPostulacion=int
-    print("Carreras")
     while opcionPostulacion!=4:
+        print("\n──────────────────────")
         print("Universidades:")#universidades a postular
         print("1. Universidad Central del Ecuador") 
-        print("2. Universidad de guayaquil") 
-        print("3. Universidad Técnica en Ambato") 
+        print("2. Universidad de Guayaquil") 
+        print("3. Universidad Técnica de Ambato") 
+        print("4. Salir") 
+        print("──────────────────────")
         opcionPostulacion=int(input("Ingrese una opción: ")) #carreraas a postular 
         if opcionPostulacion == 1: #carrearas universidad 1 
             print("1. Administración de Empresas [825]") 
@@ -437,180 +446,163 @@ def postulacion():
     #variable para elegir el menú 
     opcionPostulacion=int 
     #bucle while  
-    validacionPostulacion=False
     while opcionPostulacion!=4:
-        '''
-        Validación opciones dentro del menú
-        '''
-        print("Bienvenido", aspirante.nombre, aspirante.apellido) 
-        #Se pide por pantalla el puntaje alcanzado en el examen de admisión 
-        aspirante.puntaje=int(input("Ingrese el puntaje adquirido: ")) 
         '''
         Universidades que se tomaron de ejemplo para la  
         respectiva postulación del aspirante 
         '''
         #Universidades a postular: 
+        print("\n──────────────────────")
         print("Universidades:")
         print("1. Universidad Central del Ecuador") 
         print("2. Universidad de Guayaquil") 
-        print("3. Universidad Técnica en Ambato") 
-        while validacionPostulacion==False:
-            opcionPostulacion=int(input("Ingrese puntaje de postluación: ")) 
-            if opcionPostulacion<=1000:
-                validacionPostulacion=True
-            else:
-                print("[!] Ingrese un puntaje de postulación válido")
-                enter=str(input("Presione enter para continuar")) 
-                validacionPostulacion=False 
+        print("3. Universidad Técnica de Ambato")
+        print("4. Salir") 
+        print("──────────────────────")
+        print(f'Bienvenido {aspirante.nombre} {aspirante.apellido}, antes de postular recuerde que su puntaje es {aspirante.puntaje}.') 
+        opcionValidar=(input("Ingrese una opción: "))
+        if opcionValidar.isnumeric():
+            opcionValidar=int(opcionValidar)
+            opcionPostulacion=opcionValidar
+        else:
+            print("[!] Ingrese un número")
         #menú if
         if opcionPostulacion == 1: 
-            #carreras postular
-            print("1. Administración de Empresas [825]") 
-            print("2. Administración Pública [802]") 
-            print("3. Arquitectura [898]")
-            #puntajes de cada uno de las universidades 
-            uceAdminEmpresas=825 
-            uceAdminPublica=802 
-            uceArquitectura=898 
-            opcionUPostulacion=int(input("Elija la opcion a postular: ")) 
-            #menu de cada una de las carreras a postular 
-            if opcionUPostulacion == 1:  #postulacion carrera 1 
-            #menu de cada una de las carreras a postular 
-                if aspirante.puntaje>=uceAdminEmpresas:
-                    #condicional para determinar si el puntaje es valido para postular o no 
-                    print("[+] Correctamente postulado") 
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación") 
-            elif opcionUPostulacion == 2: #postulacion carrera 2
-                if aspirante.puntaje>=uceAdminPublica: 
-                    print("[+] Correctamente postulado") 
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 3: #postulacion carrera 3
-                if aspirante.puntaje>=uceArquitectura:
-                    print("[+] Correctamente postulado")
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación")
+            subMenuPostulacionUniversidad1()
         elif opcionPostulacion == 2: #postulacion universidad 2
         #universidad 2 
-            print("1. Administración y Suerpvisión Educativa (Ciencias de la Educación) [772]")
-            print("2. Bibliotecología y Archivología [662]")
-            print("3. Biología [732]")
-            print("4. Ciencias de la Educación y Desarrollo Comunitario Ambiental [735]")
-            print("5. Ciencias Químicas [704]")
-            print("6. Comercio Exterior [760]")
-            ugAdministracioEducativa=772
-            ugBibliotegologia=662
-            ugBiologia=732
-            ugCienciasEducacion=735
-            ugCienciasQuimicas=704
-            comercioExterior=760
-            opcionUPostulacion=int(input("Elija la opcion a postular"))
-            if opcionUPostulacion == 1: #postulacion carrera 1
-                if aspirante.puntaje>=ugAdministracioEducativa:
-                    print("[+] Correctamente postulado")
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 2: #postulacion carrera 2
-                if aspirante.puntaje>=ugBibliotegologia:
-                    print("[+] Correctamente postulado") 
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación") 
-            elif opcionUPostulacion == 3: #postulacion carrera 3 
-                if aspirante.puntaje>=ugBiologia:
-                    print("[+] Correctamente postulado") 
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación") 
-            elif opcionUPostulacion == 4: #postulacion carrera 4 
-                if aspirante.puntaje>=ugCienciasEducacion: 
-                    print("[+] Correctamente postulado")
-                    break 
-                else:
-                    print("[-] Puntaje no apto para la postulación") 
-            elif opcionUPostulacion == 5: #postulacion carrera 5 
-                if aspirante.puntaje>=ugCienciasQuimicas: 
-                    print("[+] Correctamente postulado") 
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación") 
-            elif opcionUPostulacion == 6: #postulacion carrera 6 
-                if aspirante.puntaje>=comercioExterior: 
-                    print("[+] Correctamente postulado") 
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación")
+            subMenuPostulacionUniversidad2()
         elif opcionPostulacion == 3: #postulacion universidad 3 
         #universidad 3
-            print("1. Comunicacón Social [792]") 
-            print("2. Contabilidad y Auditoría [819]") 
-            print("3. Derecho [835]") 
-            print("4. Ingeniería Bioquimica [809]") 
-            print("5. Ingeniería Civil [871]")
-            print("6. Ingenieria Electrónica y Comunicaciones [783]") 
-            print("7. Ingeniería en Alimentos [799]")
-            opcionUPostulacion=int(input("Elija la opcion a postular: "))
-            utaComunicacion=792
-            utaContabilidad=819
-            utaDerecho=835 
-            utaIngeniriaBioquimia=809
-            utaIngenieraCivl=871
-            utaIngenieraEyC=783
-            utaIngenieriaAlimentos=799
+            subMenuPostulacionUniversidad3()
 
-            if opcionUPostulacion == 1:
-                if aspirante.puntaje>=utaComunicacion: #postulacion carrera 1
-                    print("[+] Correctamente postulado") 
-                    break
-                else: 
-                    print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 2: #postulacion carrera 2
-                if aspirante.puntaje>=utaContabilidad: 
-                    print("[+] Correctamente postulado")
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación") 
-            elif opcionUPostulacion == 3: #postulacion carrera 3
-                if aspirante.puntaje>=utaDerecho:
-                    print("[+] Correctamente postulado") 
-                    break
-                else: 
-                    print("[-] Puntaje no apto para la postulación") 
-            elif opcionUPostulacion == 4: #postulacion carrera 4
-                if aspirante.puntaje>=utaIngeniriaBioquimia: 
-                    print("[+] Correctamente postulado")
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 5: #postulacion carrera 5 
-                if aspirante.puntaje>=utaIngenieraCivl:
-                    print("[+] Correctamente postulado")
-                    break
-                else: 
-                    print("[-] Puntaje no apto para la postulación")
-            elif opcionUPostulacion == 6: #postulacion carrera 6
-                if aspirante.puntaje>=utaIngenieraEyC:
-                    print("[+] Correctamente postulado")
-                    break 
-                else:
-                    print("[-] Puntaje no apto para la postulación")  
-            elif opcionUPostulacion == 7: #postulacion carrera 7
-                if aspirante.puntaje>=utaIngenieriaAlimentos: 
-                    print("[+] Correctamente postulado")
-                    break
-                else:
-                    print("[-] Puntaje no apto para la postulación") 
-        #opcion para salir del programa
-        elif opcionPostulacion == 4:
+def subMenuPostulacionUniversidad1():
+    opcionUPostulacion=int
+    while opcionUPostulacion !=4:
+        print("1. Administración de Empresas [825]") 
+        print("2. Administración Pública [802]") 
+        print("3. Arquitectura [898]")
+        print("4. Salir")
+        opcionValidar=(input("Ingrese una opción: "))
+        if opcionValidar.isnumeric():
+            opcionValidar=int(opcionValidar)
+            opcionUPostulacion=opcionValidar
+        else:
+            print("[!] Ingrese un número") 
+        #menu de cada una de las carreras a postular 
+        if opcionUPostulacion == 1:  #postulacion carrera 1 
+            print("1. Administración de Empresas [825]")
+            universidadP=universidad("Universidad Central del Ecuador", "Administración de Empresas", "Quito", 825)
+            universidadP.postularUniversidad(aspirante.puntaje) 
+        elif opcionUPostulacion == 2: #postulacion carrera 2
+            print("2. Administración Pública [802]") 
+            universidadP=universidad("Universidad Central del Ecuador", "Administración Pública", "Quito", 802)
+            universidadP.postularUniversidad(aspirante.puntaje) 
+        elif opcionUPostulacion == 3: #postulacion carrera 3
+            print("3. Arquitectura [898]")
+            universidadP=universidad("Universidad Central del Ecuador", "Arquitectura", "Quito", 898)
+            universidadP.postularUniversidad(aspirante.puntaje)
+        elif opcionUPostulacion == 4:
             print("Saliendo...")
         else:
-            print("[x] Ingrese una opción correcta")
+            print("[x] Opción invalida, elija una opción correcta")
 
+def subMenuPostulacionUniversidad2():
+    opcionUPostulacion=int
+    while opcionUPostulacion !=7:
+        print("1. Administración y Suerpvisión Educativa (Ciencias de la Educación) [772]")
+        print("2. Bibliotecología y Archivología [662]")
+        print("3. Biología [732]")
+        print("4. Ciencias de la Educación y Desarrollo Comunitario Ambiental [735]")
+        print("5. Ciencias Químicas [704]")
+        print("6. Comercio Exterior [760]")
+        print("7. Salir")
+        opcionValidar=(input("Ingrese una opción: "))
+        if opcionValidar.isnumeric():
+            opcionValidar=int(opcionValidar)
+            opcionUPostulacion=opcionValidar
+        else:
+            print("[!] Ingrese un número") 
+        #menu de cada una de las carreras a postular 
+        if opcionUPostulacion == 1:  #postulacion carrera 1 
+            print("1. Administración y Suerpvisión Educativa (Ciencias de la Educación) [772]")
+            universidadP=universidad("Universidad de Guayaquil", "Administración de Empresas", "Guayaquil", 722)
+            universidadP.postularUniversidad(aspirante.puntaje) 
+        elif opcionUPostulacion == 2: #postulacion carrera 2
+            print("2. Bibliotecología y Archivología [662]") 
+            universidadP=universidad("Universidad de Guayaquil", "Bibliotecología y Archivología", "Guayaquil", 662)
+            universidadP.postularUniversidad(aspirante.puntaje) 
+        elif opcionUPostulacion == 3: #postulacion carrera 3
+            print("3. Biología [732]")
+            universidadP=universidad("Universidad de Guayaquil", "Biología", "Guayaquil", 732)
+            universidadP.postularUniversidad(aspirante.puntaje) 
+        elif opcionUPostulacion == 4:
+            print("4. Ciencias de la Educación y Desarrollo Comunitario Ambiental [735]")
+            universidadP=universidad("Universidad de Guayaquil", "Ciencias de la Educación y Desarrollo Comunitario Ambiental", "Guayaquil", 735)
+            universidadP.postularUniversidad(aspirante.puntaje)
+        elif opcionUPostulacion == 5:
+            print("5. Ciencias Químicas [704]")
+            universidadP=universidad("Universidad de Guayaquil", "Ciencias Químicas", "Guayaquil", 704)
+            universidadP.postularUniversidad(aspirante.puntaje)
+        elif opcionUPostulacion == 6:
+            print("6. Comercio Exterior [760]")
+            universidadP=universidad("Universidad de Guayaquil", "Comercio Exterior", "Guayaquil", 760)
+            universidadP.postularUniversidad(aspirante.puntaje)
+        elif opcionUPostulacion == 7:
+            print("Saliendo...")
+        else:
+            print("[x] Opción invalida, elija una opción correcta")
+
+def subMenuPostulacionUniversidad3():
+    opcionUPostulacion=int
+    while opcionUPostulacion !=8:
+        print("1. Comunicacón Social [792]") 
+        print("2. Contabilidad y Auditoría [819]") 
+        print("3. Derecho [835]") 
+        print("4. Ingeniería Bioquimica [809]") 
+        print("5. Ingeniería Civil [871]")
+        print("6. Ingenieria Electrónica y Comunicaciones [783]") 
+        print("7. Ingeniería en Alimentos [799]")
+        print("8. Salir")
+        opcionValidar=(input("Ingrese una opción: "))
+        if opcionValidar.isnumeric():
+            opcionValidar=int(opcionValidar)
+            opcionUPostulacion=opcionValidar
+        else:
+            print("[!] Ingrese un número") 
+        #menu de cada una de las carreras a postular 
+        if opcionUPostulacion == 1:  #postulacion carrera 1 
+            print("1. Comunicacón Social [792]")
+            universidadP=universidad("Universidad Técnica de Ambato", "Comunicación Social", "Ambato", 792)
+            universidadP.postularUniversidad(aspirante.puntaje) 
+        elif opcionUPostulacion == 2: #postulacion carrera 2
+            print("2. Contabilidad y Auditoría [819]") 
+            universidadP=universidad("Universidad Técnica de Ambato", "Contabilidad y Auditoría", "Ambato", 819)
+            universidadP.postularUniversidad(aspirante.puntaje) 
+        elif opcionUPostulacion == 3: #postulacion carrera 3
+            print("3. Derecho [835]")
+            universidadP=universidad("Universidad Técnica de Ambato", "Derecho", "Ambato", 835)
+            universidadP.postularUniversidad(aspirante.puntaje) 
+        elif opcionUPostulacion == 4:
+            print("4. Ingeniería Bioquimica [809]")
+            universidadP=universidad("Universidad Técnica de Ambato", "Ingeniería Bioquimica", "Ambato", 809)
+            universidadP.postularUniversidad(aspirante.puntaje)
+        elif opcionUPostulacion == 5:
+            print("5. Ingeniería Civil [871]")
+            universidadP=universidad("Universidad Técnica de Ambato", "Ingeniería Civil", "Ambato", 871)
+            universidadP.postularUniversidad(aspirante.puntaje)
+        elif opcionUPostulacion == 6:
+            print("6. Ingenieria Electrónica y Comunicaciones [783]")
+            universidadP=universidad("Universidad Técnica de Ambato", "Ingenieria Electrónica y Comunicaciones", "Ambato", 783)
+            universidadP.postularUniversidad(aspirante.puntaje)
+        elif opcionUPostulacion == 7:
+            print("7. Ingeniería en Alimentos [799]")
+            universidadP=universidad("Universidad Técnica de Ambato", "Ingeniería en Alimentos", "Ambato", 799)
+            universidadP.postularUniversidad(aspirante.puntaje)
+        elif opcionUPostulacion == 8:
+            print("Saliendo...")
+        else:
+            print("[x] Opción invalida, elija una opción correcta")
 
 if __name__ == '__main__': #main  
     
@@ -622,8 +614,9 @@ if __name__ == '__main__': #main
     # else:
     #     print("no es feirado?")
     
-    aspirante=estudiante("nombre", "apellido", "cedula", 999)
-    
+    aspirante=estudiante("nombre", "apellido", "cedula", 792)
+
+    validacionPostulacion=False
     opcion=int
     while opcion!=5: 
         #menú a mostrar 
@@ -636,10 +629,10 @@ if __name__ == '__main__': #main
         print("4. Ver universidades a postular")
         print("5. Salir")
         #opciones a ingresar 
-        numero=(input("Ingrese una opción: "))
-        if numero.isnumeric():
-            numero=int(numero)
-            opcion=numero
+        opcionValidar=(input("Ingrese una opción: "))
+        if opcionValidar.isnumeric():
+            opcionValidar=int(opcionValidar)
+            opcion=opcionValidar
         else:
             print("[!] Ingrese un número")
         #opcion 1 
@@ -654,10 +647,32 @@ if __name__ == '__main__': #main
             apellido=str(input("Ingrese su apellido: "))
                 
             #asignamos un valor a la cédula, para evitar un error.
-            cedula="0" 
+            cedula="0"
+            while len(cedula)!=10:
+                cedula=input("Ingrese su número de cédula: ")
+                if cedula.isnumeric():
+                    #ciclo while para validar que la cédula tenga 10 dígitos 
+                    if len(cedula)==10: 
+                        print("[+] Ingreso de datos correctos") 
+                    else:
+                        print("[x] Cédula incorrecta, vuelva a ingresar")
+                else:
+                    print("[!] ¡Solo se permiten números!")
+                    cedula='0'
+                    
+            while validacionPostulacion==False:
+                puntaje=input(f'Bienvendio , a continuación ingrese su puntaje obtenido: ') 
+                if puntaje.isnumeric():
+                    puntaje=int(puntaje)
+                    if puntaje>=100 and puntaje<=1000:
+                        print("[+] Ingreso correcto")
+                        validacionPostulacion=True
+                    else:
+                        print("[!] Ingrese un puntaje de postulación válido")
+                else:
+                    print("[!] Ingrese un puntaje de postulación válido")
+                    validacionPostulacion=False 
 
-
-            puntaje=input(f'Bienvendio {nombre} {apellido}, a continuación ingrese su puntaje obtenido: ')
             aspirante=estudiante(nombre, apellido, cedula, puntaje)
             aspirante.usuarioContrasena()
             print("Usuario:", aspirante.usuarioAspirante)
