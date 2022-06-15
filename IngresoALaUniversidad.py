@@ -7,7 +7,7 @@ import re
 import json
 from dateutil.easter import easter
 from dateutil.relativedelta import relativedelta as rd, FR
-from holidays.constants import JAN, MAY, AUG, OCT, NOV, DEC
+from holidays.constants import JAN, MAY, AUG, OCT, NOV, DEC, JUN
 from holidays.holiday_base import HolidayBase
 
 class estudiante:
@@ -34,7 +34,7 @@ class estudiante:
         Construye atributos para la clase estudiante
     usuarioContrasena(self)):
         Genera un usuario y contraseña a partir de los datos ingresados
-    iniciarSesión(self)):
+    inicioSesion(self)):
         Valida datos para el ingreso de sesión (cambia un valor a true para acceder a demás menús)
     """   
 
@@ -50,9 +50,7 @@ class estudiante:
     def usuarioContrasena (self):
         '''
         Método usuarioContrasena: 
-        Creación tanto del usuario y contraseña con los 
-        datos anteriormente ingresados, estos se basan en 
-        el simple uso de cadenas (strings): 
+        Creación tanto del usuario y contraseña con los datos ingresados o asignados en la instancia
             self.usuarioAspirante: Guarda el nombre de usuario del aspirante 
             self.constrasenaAspirante: Guarda el nombre de usuario del aspirante
         ''' 
@@ -81,7 +79,7 @@ class estudiante:
         self.password=str(input("Contraseña: "))
         #condicional donde se valida un usuario ya ingresado o un usuario resién creado
         if ((self.user == "grupo3" and self.password == "contrasenagrupo3") or (self.user == self.usuarioAspirante and self.password == self.contrasenaAspirante)):
-            print("Ingreso correcto")
+            print("[+] Ingreso exitoso")
             #Si hay un inicio de sesión correcto cambiamos la variable boolean y usarla respectivamente en las siguientes funciones
             self.acceder=True
         else:
@@ -105,6 +103,8 @@ class universidad:
     -------
     __init__(self, nombre, carrera, ciudad, puntaje)
         Construye los atributos de las clases
+    postularUniversidad(self, puntajeEstudiante):
+        Condicional para determinar si puede postular a la carrera o no
     """
     def __init__(self, nombre, carrera, ciudad, puntaje):
         self.nombre=nombre
@@ -160,7 +160,14 @@ class FeriadoEcuador(HolidayBase):
         -------
         Devuelve "True" si una fecha es día festivo
         de lo contraio devuelve el valor de "False"
-        """                    
+        """     
+        #Cronograma en base a: https://admision.senescyt.gob.ec/
+        #3ra Postulación 1ra Fecha:
+        self[datetime.date(anio, MAY, 31)] = "Tercera Postulación"
+
+        #3ra Postulación 2da Fecha:
+        self[datetime.date(anio, JUN, 1)] = "Tercera Postulación"
+
         #Días festivos 
         #Año nuevo 
         self[datetime.date(anio, JAN, 1)] = "Año Nuevo"
@@ -267,7 +274,7 @@ class FeriadoEcuador(HolidayBase):
             else:
                 self[datetime.date(anio, DEC, 6)] = nombre
 
-class fechaFeriado:
+class fechaEcuador:
     '''
     Clase para determinar los respectivos crónogramas
         Basado en el cronograma de la SENESCYT: https://admision.senescyt.gob.ec/
@@ -310,35 +317,35 @@ class fechaFeriado:
 
     def __esFeriado(self, fecha, online):
         """
-        Checks if date (in ISO 8601 format YYYY-MM-DD) is a public holiday in Ecuador
-        if online == True it will use a REST API, otherwise it will generate the holidays of the examined year
+        Comprueba si la fecha (en formato ISO 8601 AAAA-MM-DD) es un día festivo en Ecuador
+        si online == True utilizará una API REST, de lo contrario generará los días festivos del año examinado
         
-        Parameters
+        Parametros
         ----------
-        date : str
-            It is following the ISO 8601 format YYYY-MM-DD: e.g., 2020-04-22
-        online: boolean, optional
-            if online == True the abstract public holidays API will be used        
-        Returns
+        fecha : str
+            Está siguiendo el formato ISO 8601 AAAA-MM-DD: por ejemplo, 2020-04-22
+        online: boolean, opcional
+            si online == True se utilizará la API de días festivos abstractos
+        Retornos 
         -------
-        Returns True if the checked date (in ISO 8601 format YYYY-MM-DD) is a public holiday in Ecuador, otherwise False
-        """            
+        Retorna True si la fecha marcada (en formato ISO 8601 AAAA-MM-DD) es un día festivo en Ecuador, de lo contrario False
+        """          
         y, m, d = fecha.split('-')
 
         if online:
-            # abstractapi Holidays API, free version: 1000 requests per month
-            # 1 request per second
-            # retrieve API key from enviroment variable
+            # API de vacaciones abstractapi, versión gratuita: 1000 solicitudes por mes
+            # 1 solicitud por segundo
+            # recuperar la clave API de la variable de entorno
             key = os.environ.get('HOLIDAYS_API_KEY')
             response = requests.get(
                 "https://holidays.abstractapi.com/v1/?api_key={}&country=EC&year={}&month={}&day={}".format(key, y, m, d))
             if (response.status_code == 401):
-                # This means there is a missing API key
+                # Esto significa que falta una clave de API.
                 raise requests.HTTPError(
                     'Missing API key. Store your key in the enviroment variable HOLIDAYS_API_KEY')
-            if response.content == b'[]':  # if there is no holiday we get an empty array
+            if response.content == b'[]':  # si no hay vacaciones, obtenemos una matriz vacía
                 return False
-            # Fix Maundy Thursday incorrectly denoted as holiday
+            # Arregla el Jueves Santo incorrectamente denotado como feriado
             if json.loads(response.text[1:-1])['name'] == 'Maundy Thursday':
                 return False
             return True
@@ -347,7 +354,7 @@ class fechaFeriado:
             return fecha in ecu_holidays
         
     def condicionFecha (self):
-        # Check if date is a holiday
+        # Comprobar si la fecha es un día festivo
         if self.__esFeriado(self.fecha, self.online):
             return True
         return False
@@ -355,9 +362,9 @@ class fechaFeriado:
 
 def opcionInicioSesion (): #opción de inicio se sesión
     '''
-    Inicio de sesión
-    Llamamos a los métodos respectivamente antes comentados 
-    para el ingreso de sesión
+    Validación de datos ingresados dentro de la clase estudiante
+    ----
+    Valida el usuario y contraseña creada con información que pide por pantalla
     '''
     print("\n──────────────────────")
     print("Inicio de sesión")
@@ -371,7 +378,13 @@ def opcionInicioSesion (): #opción de inicio se sesión
         enter=str(input("Presione enter para continuar..."))
 
 
-def opcionCronograma (): #opción para mostrar al crónograma 
+def opcionCronograma (): #opción para mostrar al crónograma
+    '''
+    Muestra por pantalla el cronograma correspondiente\n
+    Imprime por pantalla las fechas y a que fase del proceso de admisión pertenece
+    ----
+    Información recopilada de: https://admision.senescyt.gob.ec/
+    '''
     print("Cronogramas")
     print("────────────────────")
     print("Tercera postulación") #etapa 9
@@ -395,11 +408,8 @@ def opcionCronograma (): #opción para mostrar al crónograma
 
 def opcionMostrarCarrerars ():
     '''
-    Cumple casi con el mismo objetivo de la funcion postulacion 
-    pero esta solo se encarga de mostrar la información de las universidades 
-    a postular 
-    información recopilada de = https://drive.google.com/file/d/1jVqexdOxCfdSbMaX_Qhf0b-Tj4wlnPjo/view 
-    nombreCarrera [puntajeCarrear] 
+    Muestra por pantalla la posibles universidades a postular \n 
+    Información recopilada de = https://drive.google.com/file/d/1jVqexdOxCfdSbMaX_Qhf0b-Tj4wlnPjo/view  
     '''
     opcionPostulacion=int
     while opcionPostulacion!=4:
@@ -437,46 +447,64 @@ def opcionMostrarCarrerars ():
 
 def postulacion():
     '''
-    Función Postulación:
-    Función cuyo fin tendrá comparar el puntaje del eestudiante 
-    con el de las respectivas universidades a postuarle y retonar como resultado 
-    si se postuló correctamente o no 
-    información recopilada de: https://drive.google.com/file/d/1jVqexdOxCfdSbMaX_Qhf0b-Tj4wlnPjo/view
+    Almacenamiento de cada universidad ingresada en el sistema\n
+    Información recopilada de: https://drive.google.com/file/d/1jVqexdOxCfdSbMaX_Qhf0b-Tj4wlnPjo/view
     ''' 
-    #variable para elegir el menú 
-    opcionPostulacion=int 
-    #bucle while  
-    while opcionPostulacion!=4:
-        '''
-        Universidades que se tomaron de ejemplo para la  
-        respectiva postulación del aspirante 
-        '''
-        #Universidades a postular: 
-        print("\n──────────────────────")
-        print("Universidades:")
-        print("1. Universidad Central del Ecuador") 
-        print("2. Universidad de Guayaquil") 
-        print("3. Universidad Técnica de Ambato")
-        print("4. Salir") 
-        print("──────────────────────")
-        print(f'Bienvenido {aspirante.nombre} {aspirante.apellido}, antes de postular recuerde que su puntaje es {aspirante.puntaje}.') 
-        opcionValidar=(input("Ingrese una opción: "))
-        if opcionValidar.isnumeric():
-            opcionValidar=int(opcionValidar)
-            opcionPostulacion=opcionValidar
-        else:
-            print("[!] Ingrese un número")
-        #menú if
-        if opcionPostulacion == 1: 
-            subMenuPostulacionUniversidad1()
-        elif opcionPostulacion == 2: #postulacion universidad 2
-        #universidad 2 
-            subMenuPostulacionUniversidad2()
-        elif opcionPostulacion == 3: #postulacion universidad 3 
-        #universidad 3
-            subMenuPostulacionUniversidad3()
+    #variable para elegir el menú
+    fecha=input("Ingrese la fecha: \nSiga el siguiente formato: YYYY-MM-DD:\n")
+    online=False
+    feriados=fechaEcuador(fecha, online)
+    if feriados.condicionFecha():
+        print("feriado")
+        print(feriados._fecha) 
+        opcionPostulacion=int 
+        #bucle while  
+        while opcionPostulacion!=4:
+            '''
+            Universidades que se tomaron de ejemplo para la  
+            respectiva postulación del aspirante 
+            '''
+            #Universidades a postular: 
+            print("\n──────────────────────")
+            print("Universidades:")
+            print("1. Universidad Central del Ecuador") 
+            print("2. Universidad de Guayaquil") 
+            print("3. Universidad Técnica de Ambato")
+            print("4. Salir") 
+            print("──────────────────────")
+            print(f'Bienvenido(a) {aspirante.nombre} {aspirante.apellido}, antes de postular recuerde que su puntaje es {aspirante.puntaje}.') 
+            opcionValidar=(input("Ingrese una opción: "))
+            if opcionValidar.isnumeric():
+                opcionValidar=int(opcionValidar)
+                opcionPostulacion=opcionValidar
+            else:
+                print("[!] Ingrese un número")
+            #menú if
+            if opcionPostulacion == 1: #postulación universidad 1
+                print("\n──────────────────────")
+                subMenuPostulacionUniversidad1()
+            elif opcionPostulacion == 2: #postulación universidad 2
+                print("\n──────────────────────")
+                subMenuPostulacionUniversidad2()
+            elif opcionPostulacion == 3: #postulación universidad 3 
+                print("\n──────────────────────")   
+                subMenuPostulacionUniversidad3()
+            else:
+                print("[x] Opción invalida, elija una opción correcta")
+    else:
+        print("¡No nos encontramos en servicio, vuela siguiendo el crónograma!")
 
+#Universidad 1
+#Universidad Central del Ecuador
 def subMenuPostulacionUniversidad1():
+    '''
+    Función donde se instancia la clase universidad dependiendo de la universidad, carrera, ciudad y puntaje.
+    ---
+    nombre: nombre universidad
+    carrera: carrera de la universidad
+    ciudad: ciudad universidad
+    puntaje: puntaje de la carrera
+    '''
     opcionUPostulacion=int
     while opcionUPostulacion !=4:
         print("1. Administración de Empresas [825]") 
@@ -507,6 +535,8 @@ def subMenuPostulacionUniversidad1():
         else:
             print("[x] Opción invalida, elija una opción correcta")
 
+#Universidad 2
+#Universidad de Guayaquil
 def subMenuPostulacionUniversidad2():
     opcionUPostulacion=int
     while opcionUPostulacion !=7:
@@ -536,15 +566,15 @@ def subMenuPostulacionUniversidad2():
             print("3. Biología [732]")
             universidadP=universidad("Universidad de Guayaquil", "Biología", "Guayaquil", 732)
             universidadP.postularUniversidad(aspirante.puntaje) 
-        elif opcionUPostulacion == 4:
+        elif opcionUPostulacion == 4: #postulacion carrera 4
             print("4. Ciencias de la Educación y Desarrollo Comunitario Ambiental [735]")
             universidadP=universidad("Universidad de Guayaquil", "Ciencias de la Educación y Desarrollo Comunitario Ambiental", "Guayaquil", 735)
             universidadP.postularUniversidad(aspirante.puntaje)
-        elif opcionUPostulacion == 5:
+        elif opcionUPostulacion == 5: #postulacion carrera 5
             print("5. Ciencias Químicas [704]")
             universidadP=universidad("Universidad de Guayaquil", "Ciencias Químicas", "Guayaquil", 704)
             universidadP.postularUniversidad(aspirante.puntaje)
-        elif opcionUPostulacion == 6:
+        elif opcionUPostulacion == 6: #postulacion carrera 6
             print("6. Comercio Exterior [760]")
             universidadP=universidad("Universidad de Guayaquil", "Comercio Exterior", "Guayaquil", 760)
             universidadP.postularUniversidad(aspirante.puntaje)
@@ -553,6 +583,8 @@ def subMenuPostulacionUniversidad2():
         else:
             print("[x] Opción invalida, elija una opción correcta")
 
+#Universidad 3
+#Universidad Técnica de Ambato
 def subMenuPostulacionUniversidad3():
     opcionUPostulacion=int
     while opcionUPostulacion !=8:
@@ -583,19 +615,19 @@ def subMenuPostulacionUniversidad3():
             print("3. Derecho [835]")
             universidadP=universidad("Universidad Técnica de Ambato", "Derecho", "Ambato", 835)
             universidadP.postularUniversidad(aspirante.puntaje) 
-        elif opcionUPostulacion == 4:
+        elif opcionUPostulacion == 4: #postulación carrera 4
             print("4. Ingeniería Bioquimica [809]")
             universidadP=universidad("Universidad Técnica de Ambato", "Ingeniería Bioquimica", "Ambato", 809)
             universidadP.postularUniversidad(aspirante.puntaje)
-        elif opcionUPostulacion == 5:
+        elif opcionUPostulacion == 5: #postulación carrera 5
             print("5. Ingeniería Civil [871]")
             universidadP=universidad("Universidad Técnica de Ambato", "Ingeniería Civil", "Ambato", 871)
             universidadP.postularUniversidad(aspirante.puntaje)
-        elif opcionUPostulacion == 6:
+        elif opcionUPostulacion == 6: #postulación carrera 6
             print("6. Ingenieria Electrónica y Comunicaciones [783]")
             universidadP=universidad("Universidad Técnica de Ambato", "Ingenieria Electrónica y Comunicaciones", "Ambato", 783)
             universidadP.postularUniversidad(aspirante.puntaje)
-        elif opcionUPostulacion == 7:
+        elif opcionUPostulacion == 7: #postulación carrera 7
             print("7. Ingeniería en Alimentos [799]")
             universidadP=universidad("Universidad Técnica de Ambato", "Ingeniería en Alimentos", "Ambato", 799)
             universidadP.postularUniversidad(aspirante.puntaje)
@@ -604,19 +636,16 @@ def subMenuPostulacionUniversidad3():
         else:
             print("[x] Opción invalida, elija una opción correcta")
 
+#función main
 if __name__ == '__main__': #main  
     
-    # fecha=input("Ingrese fecha con el siguiente formato YYYY-MM-DD: ")
-    # online=False
-    # feriados=test(fecha, online)
-    # if feriados.condicionFecha():
-    #     print("feriado")
-    # else:
-    #     print("no es feirado?")
-    
-    aspirante=estudiante("nombre", "apellido", "cedula", 792)
+    #Instancia de la clase estudiante
+    aspirante=estudiante("nombre", "apellido", "cedula", 792) #Asignación de valores para evitar errores
 
+    #Declaración tipo boolean para validación del puntaje dentro de la opción 2
     validacionPostulacion=False
+
+    #Declaración 'opcion' para navegación por el menú principal
     opcion=int
     while opcion!=5: 
         #menú a mostrar 
@@ -659,9 +688,10 @@ if __name__ == '__main__': #main
                 else:
                     print("[!] ¡Solo se permiten números!")
                     cedula='0'
-                    
+
+            #validiación de puntaje 'mayor igual a 100 o menor igual a 1000'        
             while validacionPostulacion==False:
-                puntaje=input(f'Bienvendio , a continuación ingrese su puntaje obtenido: ') 
+                puntaje=input(f'Bienvendio(a) {nombre} {apellido}, a continuación ingrese su puntaje obtenido: ') 
                 if puntaje.isnumeric():
                     puntaje=int(puntaje)
                     if puntaje>=100 and puntaje<=1000:
@@ -672,7 +702,8 @@ if __name__ == '__main__': #main
                 else:
                     print("[!] Ingrese un puntaje de postulación válido")
                     validacionPostulacion=False 
-
+            
+            #Instancia de la clase estudiante con nuevos datos
             aspirante=estudiante(nombre, apellido, cedula, puntaje)
             aspirante.usuarioContrasena()
             print("Usuario:", aspirante.usuarioAspirante)
